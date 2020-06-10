@@ -4,10 +4,14 @@ FSJS project 5 - Public API Requests
 --aiming for exceeds expectations--
 ******************************************/
 
+let employeesArray = [];
 const randomUserAPI = 'https://randomuser.me/api/?nat=us&results=12';
 const searchDiv = document.querySelector('.search-container');
 const galleryDiv = document.querySelector('#gallery');
 
+/** 
+---SEARCH BAR---
+**/
 
 // createSearch() dynamically creates and adds the search bar to the DOM.
 function createSearch() {
@@ -22,6 +26,50 @@ function createSearch() {
 };
 createSearch();
 
+// Event listener filters employees in real-time based on user search input.
+const searchInput = document.querySelector('#search-input');
+
+searchInput.addEventListener('keyup', (e) => {
+    // Creates an array of just the employee names.
+    let input = e.target.value.toLowerCase();
+    let employeeNames = [];
+    
+    employeesArray.forEach(info => {
+        const employeeName = `${info.name.first} ${info.name.last}`;
+        employeeNames.push(employeeName.toLowerCase());
+    });
+
+    // Creates an array of the indexes of the employee cards whose names include the search input.
+    let matchedIndexes = [];
+    
+    employeeNames.forEach(name => {   
+        if(name.indexOf(input) >= 0) {
+            const matchIndex = employeeNames.indexOf(name);
+            matchedIndexes.push(matchIndex);
+        };
+    });
+
+    // Creates an array of just the employee cards that match the search.
+    const employeeCards = Array.from(document.querySelectorAll('.card'));
+    let matchedCards = [];
+    
+    employeeCards.forEach(card => {
+        for(let i = 0; i < matchedIndexes.length; i++) {
+            const cardId = parseInt(card.id);
+            if(cardId === matchedIndexes[i]) {
+                matchedCards.push(card);
+            };
+        };
+    });
+
+    // Displays only the employee cards that match the search.
+    employeeCards.forEach(card => card.style.display = 'none');
+    matchedCards.forEach(card => card.style.display = 'inherit');
+});
+
+/** 
+---EMPLOYEE CARDS---
+**/
 
 // createCards() dynamically creates and adds the employee cards to the DOM.
 // An event listener is also added to each employee card, and other event listeners added to modal buttons.
@@ -30,6 +78,7 @@ function createCards(data) {
     let i = 0;
     let targetId;
 
+    // Creates an employee card for each object in the data array.
     data.forEach(info => {
         const galleryCard = document.createElement('div');
         const html = `
@@ -39,7 +88,7 @@ function createCards(data) {
                     <div class="card-info-container">
                         <h3 id="name" class="card-name cap">${info.name.first} ${info.name.last}</h3>
                         <p class="card-text">${info.email}</p>
-                        <p class="card-text cap">${info.location.city}, ${info.location.state}</p>
+                        <p class="card-text cap">${info.location.city}</p>
                     </div>
                     `;
 
@@ -47,8 +96,9 @@ function createCards(data) {
         galleryCard.className = 'card';
         galleryCard.id = i++;
         galleryCard.innerHTML = html;
+        employeesArray.push(info);
  
-        // Event listener opens the modal window to display additional info about the selected employee.
+        // Event listener added to each card opens the modal window to display additional info about the selected employee.
         galleryCard.addEventListener('click', (e) => {
             setModalContent(info);
             targetId = parseInt(e.currentTarget.id);
@@ -58,15 +108,19 @@ function createCards(data) {
     // Event listener closes the modal window when the user clicks on the X button in the corner.
     const modalCloseBtn = document.getElementById('modal-close-btn');
     const modalDiv = document.querySelector('.modal-container');
+
     modalCloseBtn.addEventListener('click', () => {
-        modalDiv.hidden = true;
+        modalDiv.style.display = 'none';
     });
 
+    // Event listeners allow user to toggle to the previous or next employee's modal.
     const indexOfLastEmployee = data.length - 1;
-    // Event listener allows user to toggle to the previous employee's modal.
     const modalPrevBtn = document.getElementById('modal-prev');
+    const modalNextBtn = document.getElementById('modal-next');
+    
     modalPrevBtn.addEventListener('click', () => {
         let prevData;
+        
         if(targetId === 0) {
             prevData = data[indexOfLastEmployee];
             targetId = indexOfLastEmployee;
@@ -78,8 +132,6 @@ function createCards(data) {
         };
     });
 
-    // Event listener allows user to toggle to the next employee's modal.
-    const modalNextBtn = document.getElementById('modal-next');
     modalNextBtn.addEventListener('click', () => {
         if(targetId === indexOfLastEmployee) {
             nextData = data[0];
@@ -92,6 +144,10 @@ function createCards(data) {
         };
     });
 };
+
+/** 
+---MODAL WINDOW---
+**/
 
 // createModal() dynamically creates and adds the modal to the DOM.
 function createModal() {
@@ -110,7 +166,7 @@ function createModal() {
     modalDiv.innerHTML = html;
     galleryDiv.insertAdjacentElement('afterend', modalDiv);
     modalDiv.className = 'modal-container';
-    modalDiv.hidden = true;
+    modalDiv.style.display = 'none';
 };
 createModal();
 
@@ -140,8 +196,12 @@ function setModalContent(data) {
                 `;
     
     modalInfo.innerHTML = html;
-    modalDiv.hidden = false;
+    modalDiv.style.display = 'inherit';
 };
+
+/** 
+---FETCH API---
+**/
 
 // getEmployees() fetches data of 12 random users (from the US) from the API
 // and then calls the createCards() function to display the employees on the page.
@@ -149,6 +209,7 @@ function setModalContent(data) {
 async function getEmployees(url) {
     const responses = await fetch(url);
     const responsesJSON = await responses.json();
+    
     createCards(responsesJSON.results);
 };
 getEmployees(randomUserAPI);
