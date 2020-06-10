@@ -2,7 +2,7 @@
    Public API Request
 ======================================== */
 
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Palanquin+Dark&display=swap');
 
 * {
 	box-sizing: border-box;
@@ -14,9 +14,9 @@ html, body {
 }
 
 body {
-    font-family: "Nunito", sans-serif;
+    font-family: 'Palanquin Dark', sans-serif; /* changed font */
     text-align: center;
-    background: rgba(235, 235, 235, 0.9);
+    background: #2B5574;  /* changed background color */
 }
 
 header {
@@ -24,20 +24,23 @@ header {
 }
 
 .header-inner-container {
-    max-width: 1180px;
+    max-width: 1200px; /* increased max width */
     margin: auto;
 }
 
 header h1 {
-    font-size: 1.25em;
-    color: rgba(50, 50, 50, 0.9);
+    font-size: 2em; /* increased font size */
+    color: #FFFFFF; /* changed font color */
     margin-top: 35px;
+    text-shadow: #B0C0CC .5px .5px 3px; /* added slight shadow */
 }
 
 .search-input {
     padding: 0.4rem 1rem;
-    border: 1px solid rgba(200, 200, 200, 0.9);
+    height: 33px; /* made input same height as submit button */
+    border: 2.5px solid #FFFFFF; /* changed color and thickened border */
     border-radius: 0.25rem 0 0 0.25rem ;
+    background: #D1DFE9; /* set background color */
     max-width: 20rem;
     transition: .4s ease-out;
     outline: none;
@@ -50,9 +53,9 @@ header h1 {
 .search-submit {
     cursor: pointer;
     height: 33px;
-    background: rgba(245, 245, 245, 0.9);
+    background: #D1DFE9; /* changed background color */
     border-radius: 0 0.25rem 0.25rem 0;
-    border: 1px solid rgba(200, 200, 200, 0.9);
+    border: 2.5px solid #FFFFFF; /* changed color and thickened border */
     transition: .4s ease-out;
     outline: none;
 }
@@ -73,7 +76,7 @@ header h1 {
     flex-wrap: wrap;
     justify-content: space-evenly;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px; /* widened max-width */
     margin: auto;
 }
   
@@ -87,9 +90,9 @@ header h1 {
     max-width: 360px;
     margin: 10px 10px 20px;
     padding: 10px;
-    background: rgba(245, 245, 245, 0.9);
+    background: #D1DFE9; /* changed background color */
     border-radius: 0.25em;
-    border: 1px solid rgba(50, 50, 50, 0.3);
+    border: 2.5px solid #FFFFFF; /* changed color and thickened border */
     transition: .4s ease-out;
     overflow: hidden;
 }
@@ -119,6 +122,10 @@ header h1 {
     text-transform: capitalize;
 }
 
+#name {
+    text-transform: uppercase; /* set names to uppercase */
+}
+
 
 /* ===================================== 
    Modal
@@ -142,7 +149,7 @@ header h1 {
     padding-bottom: 15px;
     background: rgba(255, 255, 255, 1);
     border-radius: 0.25em;
-    border: 1px solid rgba(100, 100, 100, 0.3);
+    border: 2.5px solid rgba(100, 100, 100, 0.3); /* thickened border */
     transition: .4s ease-out;
 }
 
@@ -152,7 +159,7 @@ header h1 {
     right: 15px;
     cursor: pointer;
     color: rgba(255, 255, 255, 0.9);
-    background: rgba(0, 0, 0, 0.8);
+    background: #2B5574; /* changed color */
     outline: none;
     border-radius: 0.25em;
     border: 1px solid rgba(50, 50, 50, 0.3);
@@ -166,6 +173,7 @@ header h1 {
 
 .modal-name {
     margin-bottom: 5px;
+    text-transform: uppercase; /* set text to uppercase */
 }
 
 .modal-text {
@@ -186,7 +194,7 @@ header h1 {
     justify-content: space-evenly;
     width: 95%;
     max-width: 420px;
-    padding: 10px 15px 15px;;
+    padding: 10px 15px 15px;
     margin: 10px auto auto;
     background: rgba(255, 255, 255, 1);
     border-radius: 0.25em;
@@ -201,7 +209,7 @@ header h1 {
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.9);
     padding: 0.75em 1.5em;
-    background: rgba(0, 0, 0, 0.8);
+    background: #2B5574; /* changed color */
     border-radius: 0.35em;
     transition: .4s ease-out;
     outline: none;

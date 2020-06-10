@@ -13,7 +13,7 @@ const galleryDiv = document.querySelector('#gallery');
 function createSearch() {
     const html = `
                 <form action="#" method="get">
-                    <input type="search" id="search-input" class="search-input" placeholder="Search...">
+                    <input type="search" id="search-input" class="search-input" placeholder="Search . . .">
                     <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
                 </form>
                 `;
@@ -62,13 +62,14 @@ function createCards(data) {
         modalDiv.hidden = true;
     });
 
+    const indexOfLastEmployee = data.length - 1;
     // Event listener allows user to toggle to the previous employee's modal.
     const modalPrevBtn = document.getElementById('modal-prev');
     modalPrevBtn.addEventListener('click', () => {
         let prevData;
         if(targetId === 0) {
-            prevData = data[11];
-            targetId = 11;
+            prevData = data[indexOfLastEmployee];
+            targetId = indexOfLastEmployee;
             setModalContent(prevData);
         } else {        
             prevData = data[targetId - 1];
@@ -80,7 +81,7 @@ function createCards(data) {
     // Event listener allows user to toggle to the next employee's modal.
     const modalNextBtn = document.getElementById('modal-next');
     modalNextBtn.addEventListener('click', () => {
-        if(targetId === 11) {
+        if(targetId === indexOfLastEmployee) {
             nextData = data[0];
             targetId = 0;
             setModalContent(nextData);
