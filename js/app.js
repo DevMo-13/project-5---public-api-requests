@@ -4,7 +4,7 @@ FSJS project 5 - Public API Requests
 --aiming for exceeds expectations--
 ******************************************/
 
-let employeesArray = [];
+const employeesArray = [];
 const randomUserAPI = 'https://randomuser.me/api/?nat=us&results=12';
 const searchDiv = document.querySelector('.search-container');
 const galleryDiv = document.querySelector('#gallery');
@@ -31,8 +31,8 @@ const searchInput = document.querySelector('#search-input');
 
 searchInput.addEventListener('keyup', (e) => {
     // Creates an array of just the employee names.
-    let input = e.target.value.toLowerCase();
-    let employeeNames = [];
+    const input = e.target.value.toLowerCase();
+    const employeeNames = [];
     
     employeesArray.forEach(info => {
         const employeeName = `${info.name.first} ${info.name.last}`;
@@ -40,7 +40,7 @@ searchInput.addEventListener('keyup', (e) => {
     });
 
     // Creates an array of the indexes of the employee cards whose names include the search input.
-    let matchedIndexes = [];
+    const matchedIndexes = [];
     
     employeeNames.forEach(name => {   
         if(name.indexOf(input) >= 0) {
@@ -51,7 +51,7 @@ searchInput.addEventListener('keyup', (e) => {
 
     // Creates an array of just the employee cards that match the search.
     const employeeCards = Array.from(document.querySelectorAll('.card'));
-    let matchedCards = [];
+    const matchedCards = [];
     
     employeeCards.forEach(card => {
         for(let i = 0; i < matchedIndexes.length; i++) {
