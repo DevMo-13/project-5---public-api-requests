@@ -2,7 +2,7 @@
    Public API Request
 ======================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Palanquin+Dark&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Muli:wght@300;400&display=swap");
 
 * {
 	box-sizing: border-box;
@@ -14,7 +14,7 @@ html, body {
 }
 
 body {
-    font-family: 'Palanquin Dark', sans-serif; /* changed font */
+    font-family: 'Muli', sans-serif; /* changed font */
     text-align: center;
     background: #2B5574;  /* changed background color */
 }
@@ -26,13 +26,14 @@ header {
 .header-inner-container {
     max-width: 1200px; /* increased max width */
     margin: auto;
+    display: flex; /* horizontally aligned the header and the search buttons */
+    align-items: center; /* horizontally aligned the header and the search buttons */
 }
 
 header h1 {
-    font-size: 2em; /* increased font size */
+    font-size: 1.75em; /* changed font size */
     color: #FFFFFF; /* changed font color */
     margin-top: 35px;
-    text-shadow: #B0C0CC .5px .5px 3px; /* added slight shadow */
 }
 
 .search-input {
