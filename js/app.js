@@ -4,10 +4,10 @@ FSJS project 5 - Public API Requests
 --aiming for exceeds expectations--
 ******************************************/
 
-const employeesArray = [];
 const randomUserAPI = 'https://randomuser.me/api/?nat=us&results=12';
 const searchDiv = document.querySelector('.search-container');
 const galleryDiv = document.querySelector('#gallery');
+const employeeNames = [];
 
 /** 
 ---SEARCH BAR---
@@ -30,26 +30,18 @@ createSearch();
 const searchInput = document.querySelector('#search-input');
 
 searchInput.addEventListener('keyup', (e) => {
-    // Creates an array of just the employee names.
+    // Creates an array of the indexes of the employees whose names include the search input.
     const input = e.target.value.toLowerCase();
-    const employeeNames = [];
-    
-    employeesArray.forEach(info => {
-        const employeeName = `${info.name.first} ${info.name.last}`;
-        employeeNames.push(employeeName.toLowerCase());
-    });
-
-    // Creates an array of the indexes of the employee cards whose names include the search input.
     const matchedIndexes = [];
     
     employeeNames.forEach(name => {   
-        if(name.indexOf(input) >= 0) {
+        if(name.indexOf(input) !== -1) {
             const matchIndex = employeeNames.indexOf(name);
             matchedIndexes.push(matchIndex);
         };
     });
 
-    // Creates an array of just the employee cards that match the search.
+    // Creates an array of just the employee cards that match the search, and hides all cards.
     const employeeCards = Array.from(document.querySelectorAll('.card'));
     const matchedCards = [];
     
@@ -60,10 +52,11 @@ searchInput.addEventListener('keyup', (e) => {
                 matchedCards.push(card);
             };
         };
+
+        card.style.display = 'none';
     });
 
     // Displays only the employee cards that match the search.
-    employeeCards.forEach(card => card.style.display = 'none');
     matchedCards.forEach(card => card.style.display = 'inherit');
 });
 
@@ -96,7 +89,10 @@ function createCards(data) {
         galleryCard.className = 'card';
         galleryCard.id = i++;
         galleryCard.innerHTML = html;
-        employeesArray.push(info);
+        
+        // Creates an array of just the employee names to use in the search functionality.
+        const employeeName = `${info.name.first} ${info.name.last}`;
+        employeeNames.push(employeeName.toLowerCase());
  
         // Event listener added to each card opens the modal window to display additional info about the selected employee.
         galleryCard.addEventListener('click', (e) => {
@@ -117,10 +113,10 @@ function createCards(data) {
     const indexOfLastEmployee = data.length - 1;
     const modalPrevBtn = document.getElementById('modal-prev');
     const modalNextBtn = document.getElementById('modal-next');
+    let prevData;
+    let nextData;
     
     modalPrevBtn.addEventListener('click', () => {
-        let prevData;
-        
         if(targetId === 0) {
             prevData = data[indexOfLastEmployee];
             targetId = indexOfLastEmployee;
