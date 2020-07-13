@@ -8,8 +8,8 @@ Live link to the project can be found here: https://devmo-13.github.io/public-ap
 ---
 
 Key achievements:
-- I requested a JSON object from the public API
-- I parsed the data so that 12 employees are listed in a grid with their thumbnail image, full name, email, and location
+- Requested a JSON object from the public API
+- Parsed the data so that 12 employees are listed in a grid with their thumbnail image, full name, email, and location
 - Clicking the employee’s image or name will open a modal window with more detailed information, such as the employee’s birthday and address
-- I added a way to toggle back and forth between employees when the modal window is open
-- I added search functionality that filters the directory by name
+- Added a way to toggle back and forth between employees when the modal window is open
+- Added search functionality that filters the directory by name
