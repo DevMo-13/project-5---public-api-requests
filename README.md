@@ -3,7 +3,7 @@
 
 Employee directory for a fictional company called Awesome Startup.
 
-Live link to the project can be found here: https://devmo-13.github.io/public-api-requests/.
+###### Live link to the project can be found here: https://devmo-13.github.io/public-api-requests/.
 
 ---
 
